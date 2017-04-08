@@ -14,7 +14,7 @@ class SMSSender
 	public $mobile_no = '';
 	public $message = '';
 
-	public static function showParams()
+	public function showParams()
 	{
 		echo $account, PHP_EOL, $password, PHP_EOL,  $mobile_no, PHP_EOL, $message, PHP_EOL;
 	}
