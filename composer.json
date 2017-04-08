@@ -1,0 +1,27 @@
+{
+    "name": "katanyoo/yii2-sms-sender",
+    "description": "This extension for send SMS to all number in Thailand",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension","sms"],
+    "license": "GPL-3.0+",
+    "authors": [
+        {
+            "name": "Katanyoo Ubalee",
+            "email": "ubalee.k@gmail.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "katanyoo\\smssender\\": ""
+        }
+    },
+    "repositories":[
+        {
+            "type": "git",
+            "url": "https://github.com/katanyoo/yii2-sms-sender"
+        }
+    ]
+}
