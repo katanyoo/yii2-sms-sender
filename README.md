@@ -38,7 +38,8 @@ return [
             'password'=> '<PASSWORD>',
         ]
     ],
-];```
+];
+```
 
 You can then send an sms as follows:
 
@@ -46,4 +47,5 @@ You can then send an sms as follows:
 Yii::$app->smsSender
      ->setMobileNo('08xxxxxxxx')
      ->setMessage('your message')
-     ->send();```
+     ->send();
+```
