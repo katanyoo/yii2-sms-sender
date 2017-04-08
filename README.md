@@ -25,7 +25,25 @@ to the require section of your `composer.json` file.
 Usage
 -----
 
-Once the extension is installed, simply use it in your code by  :
+To use this extension, simply add the following code in your application configuration:
 
 ```php
-<?= \katanyoo\smssender\AutoloadExample::widget(); ?>```
+return [
+    //....
+    'components' => [
+        'smsSender' => [
+            'class' => 'katanyoo\smssender\smsSender',
+            'provider_endpoint' => '<ENDPOINT>',
+            'username' => '<USERNAME>',
+            'password'=> '<PASSWORD>',
+        ]
+    ],
+];```
+
+You can then send an sms as follows:
+
+```php
+Yii::$app->smsSender
+     ->setMobileNo('08xxxxxxxx')
+     ->setMessage('your message')
+     ->send();```

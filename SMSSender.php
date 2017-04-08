@@ -9,17 +9,30 @@ class SMSSender
 {
 	// $proxy = 'localhost:7777';
 	// $proxy_userpwd = 'username:password';
-	public $account = '';
-	public $password = '';
-	public $mobile_no = '';
-	public $message = '';
+	public $proxy = '';
+	public $proxy_userpwd = '';
+	public $host;
+	public $username;
+	public $password;
+	public $mobile_no;
+	public $message;
+	public $provider_endpoint;
 
-	public function showParams()
-	{
-		echo $account, PHP_EOL, $password, PHP_EOL,  $mobile_no, PHP_EOL, $message, PHP_EOL;
+	public function setMobileNo($number) {
+		$this->mobile_no = $number;
+		return $this;
 	}
 
-	public static function sendMessage($account, $password, $mobile_no, $message, $schedule = '', $category = '', $sender_name = '', $proxy = '', $proxy_userpwd = '') {
+	public function setMessage($message) {
+		$this->message = $message;
+		return $this;
+	}
+
+	public function send() {
+		return $this->sendMessage();
+	}
+
+	public function sendMessage($schedule = '', $category = '', $sender_name = '', $proxy = '', $proxy_userpwd = '') {
 		$option = '';
 		if ($category == '') {
 			$category = 'General';
@@ -30,10 +43,10 @@ class SMSSender
 		}
 
 		$params = array(
-			'ACCOUNT' => $account,
-			'PASSWORD' => $password,
-			'MOBILE' => $mobile_no,
-			'MESSAGE' => $message
+			'ACCOUNT' => $this->username,
+			'PASSWORD' => $this->password,
+			'MOBILE' => $this->mobile_no,
+			'MESSAGE' => iconv("utf-8", "tis-620", $this->message)
 		);
 		if ($schedule) {
 			$params['SCHEDULE']=$schedule;
@@ -43,7 +56,7 @@ class SMSSender
 		}
 		
 		$curl_options = array(
-			CURLOPT_URL => 'http://smartcomm2.net/sc2otp/SendMessage',
+			CURLOPT_URL => $this->provider_endpoint,
 			CURLOPT_PORT => 80,
 			CURLOPT_POST => true,			
 			CURLOPT_POSTFIELDS => http_build_query($params),
